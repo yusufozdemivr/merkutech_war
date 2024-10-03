@@ -1,0 +1,11 @@
+city,lattitude,longtitude,deaths_a,deaths_b,deaths_civil,deaths_child,year,conflict_name,side_a,side_b,side_a_refugee,side_b_refugee,kidnapped
+Kabul,34.5553,69.2075,500,700,300,100,2023,Afghanistan War,Taliban,Civilians and Resistance Forces,6110219,6110219,40
+Kandahar,31.6289,65.7372,450,650,350,120,2023,Afghanistan War,Taliban,Civilians and Resistance Forces,0,0,50
+Herat,34.3529,62.204,300,500,250,90,2023,Afghanistan War,Taliban,Civilians and Resistance Forces,0,0,30
+Kunduz,36.728,68.857,250,400,200,80,2023,Afghanistan War,Taliban,Civilians and Resistance Forces,0,0,45
+Jalalabad,34.4342,70.4473,200,300,150,60,2023,Afghanistan War,Taliban,Civilians and Resistance Forces,0,0,35
+Kabul,34.5553,69.2075,520,730,320,110,2024,Afghanistan War,Taliban,Civilians and Resistance Forces,0,0,40
+Kandahar,31.6289,65.7372,470,680,370,130,2024,Afghanistan War,Taliban,Civilians and Resistance Forces,0,0,50
+Herat,34.3529,62.204,320,530,270,100,2024,Afghanistan War,Taliban,Civilians and Resistance Forces,0,0,30
+Kunduz,36.728,68.857,270,430,220,90,2024,Afghanistan War,Taliban,Civilians and Resistance Forces,0,0,45
+Jalalabad,34.4342,70.4473,220,330,170,70,2024,Afghanistan War,Taliban,Civilians and Resistance Forces,0,0,35

@@ -1,58 +1,59 @@
 from flask import Flask, jsonify
-import requests
-from bs4 import BeautifulSoup
-import re
-from threading import Timer
+import pandas as pd
 
 app = Flask(__name__)
 
-# Variable to store parsed data
-parsed_data = {}
+# Load datasets
+dataset = [
+    "./data/afghanistan.csv",
+    "./data/israel.csv",
+    "./data/syrian.csv",
+    "./data/ukraine.csv",
+]
 
-# Function to scrape and parse the Wikipedia page
-def scrape_data():
-    global parsed_data
-    try:
-        response = requests.get("https://tr.wikipedia.org/wiki/Hamas-%C4%B0srail_Sava%C5%9F%C4%B1")
-        html = response.text
-        soup = BeautifulSoup(html, 'html.parser')
-        
-        # Extract the casualties section (update the index as needed)
-        casualties_html = soup.find_all('tr')[18]  # Adjust this if the index changes
-        casualties_text = casualties_html.get_text()
-        
-        # Find the numbers using regex
-        matches = re.findall(r'(\d+\.?\d*)\+', casualties_text)
-        
-        # Parse and store the data
-        parsed_data = {
-            'palestine': {
-                'killed': matches[0],
-                'injured': matches[1],
-                'missing': matches[2]
-            },
-            'israel': {
-                'killed': matches[3],
-                'injured': matches[4],
-                'missing': matches[5],
-                'abducted': matches[6]
-            }
-        }
-        print("Data updated:", parsed_data)
-    except Exception as e:
-        print("Error while scraping:", e)
+# Helper function to add unique id to each dataset
+def load_and_add_id(filepath, country_name):
+    df = pd.read_csv(filepath)
+    df['id'] = [f"{country_name}_{i+1}" for i in range(len(df))]  # Add a unique id for each row
+    return df.to_dict(orient='records')
 
-# Timer function to refresh data every 10 minutes
-def refresh_data():
-    scrape_data()
-    Timer(600, refresh_data).start()  # Refresh every 600 seconds (10 minutes)
+# Load datasets and add unique id columns
+data_afghanistan = load_and_add_id(dataset[0], 'AFG')
+data_israel = load_and_add_id(dataset[1], 'ISR')
+data_syrian = load_and_add_id(dataset[2], 'SYR')
+data_ukraine = load_and_add_id(dataset[3], 'UKR')
 
-# Flask route to expose the parsed data via an API endpoint
-@app.route('/casualties', methods=['GET'])
-def get_casualties():
-    return jsonify(parsed_data)
+# Merge all data into a single dictionary for convenience
+merged_data = {
+    "Israel": data_israel,
+    "Afghanistan": data_afghanistan,
+    "Syrian": data_syrian,
+    "Ukraine": data_ukraine
+}
+
+@app.route('/')
+def home():
+    return "Conflict Data API"
+
+@app.route('/api/all')
+def all():
+    return jsonify(merged_data)
+
+@app.route('/api/afghanistan', methods=['GET'])
+def get_afghanistan():
+    return jsonify(data_afghanistan)
+
+@app.route('/api/israel', methods=['GET'])
+def get_israel():
+    return jsonify(data_israel)
+
+@app.route('/api/syrian', methods=['GET'])
+def get_syrian():
+    return jsonify(data_syrian)
+
+@app.route('/api/ukraine', methods=['GET'])
+def get_ukraine():
+    return jsonify(data_ukraine)
 
 if __name__ == '__main__':
-    scrape_data()  # Initial data scrape
-    refresh_data()  # Start the periodic refresh
     app.run(debug=True)

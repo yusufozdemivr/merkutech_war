@@ -1,0 +1,11 @@
+city,lattitude,longtitude,deaths_a,deaths_b,deaths_civil,deaths_child,year,conflict_name,side_a,side_b,side_a_refugee,side_b_refugee,kidnapped
+Gaza City,31.5017,34.4667,240,4400,200,50,2023,Israel-Palestine Conflict,Israel,Palestine (Hamas),6000000,6000000,50
+Rafah,31.2856,34.2356,200,5000,300,70,2023,Israel-Palestine Conflict,Israel,Palestine (Hamas),0,0,60
+Khan Younis,31.3402,34.3063,150,4300,200,40,2023,Israel-Palestine Conflict,Israel,Palestine (Hamas),0,0,40
+Tel Aviv,32.0853,34.7818,250,3200,300,70,2023,Israel-Palestine Conflict,Israel,Palestine (Hamas),0,0,70
+Jerusalem,31.7683,35.2137,160,4100,300,70,2023,Israel-Palestine Conflict,Israel,Palestine (Hamas),0,0,55
+Gaza City,31.5017,34.4667,230,4600,250,60,2024,Israel-Palestine Conflict,Israel,Palestine (Hamas),0,0,50
+Rafah,31.2856,34.2356,190,5200,350,80,2024,Israel-Palestine Conflict,Israel,Palestine (Hamas),0,0,60
+Khan Younis,31.3402,34.3063,140,4500,220,50,2024,Israel-Palestine Conflict,Israel,Palestine (Hamas),0,0,40
+Tel Aviv,32.0853,34.7818,240,3400,320,80,2024,Israel-Palestine Conflict,Israel,Palestine (Hamas),0,0,70
+Jerusalem,31.7683,35.2137,150,4300,330,80,2024,Israel-Palestine Conflict,Israel,Palestine (Hamas),0,0,55

@@ -1,0 +1,11 @@
+city,lattitude,longtitude,deaths_a,deaths_b,deaths_civil,deaths_child,year,conflict_name,side_a,side_b,side_a_refugee,side_b_refugee,kidnapped
+Kyiv,50.4501,30.5234,15000,10000,3000,500,2023,Ukraine-Russia War,Russia,Ukraine,5865447,5865447,80
+Mariupol,47.0971,37.5537,8000,7000,5000,1000,2023,Ukraine-Russia War,Russia,Ukraine,0,0,90
+Kharkiv,49.9935,36.2304,5000,4000,2000,300,2023,Ukraine-Russia War,Russia,Ukraine,0,0,70
+Donetsk,48.0159,37.8029,10000,8000,4000,700,2023,Ukraine-Russia War,Russia,Ukraine,0,0,100
+Zaporizhzhia,47.8388,35.1396,6000,5000,3000,500,2023,Ukraine-Russia War,Russia,Ukraine,0,0,85
+Kyiv,50.4501,30.5234,16000,11000,3200,600,2024,Ukraine-Russia War,Russia,Ukraine,0,0,80
+Mariupol,47.0971,37.5537,9000,8000,5200,1100,2024,Ukraine-Russia War,Russia,Ukraine,0,0,90
+Kharkiv,49.9935,36.2304,6000,5000,2200,350,2024,Ukraine-Russia War,Russia,Ukraine,0,0,70
+Donetsk,48.0159,37.8029,11000,9000,4200,750,2024,Ukraine-Russia War,Russia,Ukraine,0,0,100
+Zaporizhzhia,47.8388,35.1396,7000,6000,3200,550,2024,Ukraine-Russia War,Russia,Ukraine,0,0,85
