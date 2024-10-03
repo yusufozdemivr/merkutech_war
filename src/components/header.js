@@ -24,7 +24,6 @@ const Header = ({ data }) => {
 
 // Example of basic inline styles
 const headerStyle = {
-  padding: '20px',
   backgroundColor: '#f5f5f5',
   textAlign: 'center',
 };
@@ -32,7 +31,6 @@ const headerStyle = {
 const dataStyle = {
   display: 'flex',
   justifyContent: 'space-around',
-  marginTop: '20px',
 };
 
 export default Header;
