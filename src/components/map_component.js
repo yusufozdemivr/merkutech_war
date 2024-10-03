@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Button, Box } from '@mui/material';
-import PeopleIcon from '@mui/icons-material/People';
-import ChildCareIcon from '@mui/icons-material/ChildCare';
-import GavelIcon from '@mui/icons-material/Gavel';
-import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import L from 'leaflet';
+import CustomPopup from './custompopup';
 
+// Define red dot icon
 const redDotIcon = new L.DivIcon({
   html: `<div style="
       background-color: red;
@@ -28,7 +26,7 @@ const ChangeView = ({ center, zoom }) => {
   return null;
 };
 
-// Reusable button component for location-based zooming using Material-UI
+// Reusable button component for location-based zooming
 const LocationButton = ({ onClick, label }) => (
   <Button
     variant="contained"
@@ -41,9 +39,10 @@ const LocationButton = ({ onClick, label }) => (
 
 const MapComponent = () => {
   const [locations, setLocations] = useState([]);
-  const [currentEndpoint, setCurrentEndpoint] = useState('/api/afghanistan'); // Default endpoint
+  const [currentEndpoint, setCurrentEndpoint] = useState('https://malcom32.pythonanywhere.com/api/afghanistan'); // Default endpoint
   const [mapCenter, setMapCenter] = useState([34.5553, 69.2075]); // Kabul by default
   const [mapZoom, setMapZoom] = useState(6);
+  const [count, setCount] = useState(0); // State to store the count for war casualties
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,10 +58,12 @@ const MapComponent = () => {
     fetchData();
   }, [currentEndpoint]); // Re-fetch data when endpoint changes
 
-  const handleButtonClick = (endpoint, center, zoom) => {
+  // Handle button click, update count and endpoint
+  const handleButtonClick = (endpoint, center, zoom, casualties) => {
     setCurrentEndpoint(endpoint);
     setMapCenter(center);
     setMapZoom(zoom);
+    setCount(casualties); // Update count based on clicked location
   };
 
   return (
@@ -70,21 +71,26 @@ const MapComponent = () => {
       {/* Button controls using MUI LocationButton component */}
       <Box display="flex" justifyContent="center" marginBottom="20px">
         <LocationButton
-          onClick={() => handleButtonClick('/api/afghanistan', [34.5553, 69.2075], 6)}
-          label="Afghanistan"
+          onClick={() => handleButtonClick('https://malcom32.pythonanywhere.com/api/afghanistan', [34.5553, 69.2075], 6, 12000)}
+          label="Afganistan"
         />
         <LocationButton
-          onClick={() => handleButtonClick('/api/israel', [31.0461, 34.8516], 7)}
-          label="Israel"
+          onClick={() => handleButtonClick('https://malcom32.pythonanywhere.com/api/israel', [31.0461, 34.8516], 7, 5000)}
+          label="İsrail"
         />
         <LocationButton
-          onClick={() => handleButtonClick('/api/syrian', [34.8021, 38.9968], 7)}
-          label="Syria"
+          onClick={() => handleButtonClick('https://malcom32.pythonanywhere.com/api/syrian', [34.8021, 38.9968], 7, 15000)}
+          label="Suriye"
         />
         <LocationButton
-          onClick={() => handleButtonClick('/api/ukraine', [48.3794, 31.1656], 7)}
-          label="Ukraine"
+          onClick={() => handleButtonClick('https://malcom32.pythonanywhere.com/api/ukraine', [48.3794, 31.1656], 7, 30000)}
+          label="Ukrayna"
         />
+      </Box>
+
+      <Box display="flex" justifyContent="center" alignItems="center" marginBottom="20px" flexDirection="column">
+        <h3>Güncel Veriler:</h3>
+        <p>Toplam Hayat Kaybı: {count}</p> {/* Display the count */}
       </Box>
 
       {/* Map Component */}
@@ -108,16 +114,7 @@ const MapComponent = () => {
               position={[location.lattitude, location.longtitude]}
               icon={redDotIcon}
             >
-              <Popup>
-                <div>
-                  <strong>{location.city}</strong>
-                  <p><GavelIcon /> Deaths: {location.deaths_a}</p>
-                  <p><EmojiPeopleIcon /> Deaths (Civilians): {location.deaths_b}</p>
-                  <p><ChildCareIcon /> Children Deaths: {location.deaths_child}</p>
-                  <p><PeopleIcon /> Civilian Deaths: {location.deaths_civil}</p>
-                  <p><GavelIcon /> Kidnapped: {location.kidnapped}</p>
-                </div>
-              </Popup>
+              <CustomPopup location={location} />
             </Marker>
           ))
         ) : (
